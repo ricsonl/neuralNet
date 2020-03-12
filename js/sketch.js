@@ -2,10 +2,8 @@ function setup(){
     createCanvas(550,550);
     background(0);
 
-    var mat1 = new Matrix(3,2);
-    var mat2 = new Matrix(2,3);
-    
-    console.log(mat1, mat2, Matrix.mult(mat1, mat2));
+    var nn = new NeuralNet(5, 10, 2);
+    nn.feedForward([1, 3, 4, 2, 6]);
 }
 
 function draw(){
