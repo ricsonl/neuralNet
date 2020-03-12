@@ -30,5 +30,22 @@ class Matrix{
             return A.data[i][j] + B.data[i][j];
         });
 
+        return res;
+    }
+
+    static mult(A, B){
+        var res = new Matrix(A.rows, B.cols);
+
+        res.map((elem, i, j) => {
+            let sum = 0;
+            for(let k=0; k<B.rows; k++){
+                let el1 = A.data[i][k];
+                let el2 = B.data[k][j];
+                sum += el1*el2;
+            }
+            return sum;
+        });
+
+        return res;
     }
 }
