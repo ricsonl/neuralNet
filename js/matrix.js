@@ -32,6 +32,18 @@ class Matrix{
         });
     }
 
+    /*static map(A, func) {
+        let mat = new Matrix(A.rows, B.rows);
+
+        this.data = this.data.map((arr, i) => {
+            return arr.map((el, j) => {
+                return func(el, i, j);
+            });
+        });
+
+        return mat;
+    }*/
+
     map(func){
         this.data = this.data.map((arr, i) => {
             return arr.map((el, j) => {

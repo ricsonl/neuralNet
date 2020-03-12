@@ -1,3 +1,7 @@
+function sigmoid(x){
+    return (1/(1+Math.exp(-x)));
+}
+
 class NeuralNet{
     constructor(i_nodes, h_nodes, o_nodes){
         this.i_nodes = i_nodes;
@@ -21,10 +25,11 @@ class NeuralNet{
 
         let hidden = Matrix.mult(this.w_ih, input);
         hidden = Matrix.add(hidden, this.b_ih);
+        hidden.map(sigmoid);
 
         let output = Matrix.mult(this.w_ho, hidden);
         output = Matrix.add(output, this.b_ho);
-        output.print();
+        output.map(sigmoid);
     }
 
 }
