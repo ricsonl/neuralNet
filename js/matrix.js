@@ -5,6 +5,7 @@ class Matrix{
         this.shape = [rows, cols];
         
         this.data = [];
+
         for(let i=0; i<rows; i++){
             let arr = [];
             for(let j=0; j<cols; j++){
@@ -12,6 +13,18 @@ class Matrix{
             }
             this.data.push(arr);
         }
+    }
+
+    //diversas
+
+    map(func) {
+        this.data = this.data.map((arr, i) => {
+            return arr.map((el, j) => {
+                return func(el, i, j);
+            });
+        });
+
+        return this;
     }
 
     static arrayToMatrix(arr){
@@ -22,18 +35,42 @@ class Matrix{
         return mat;
     }
 
+    static transpose(A){
+        let mat = new Matrix(A.cols, A.rows);
+        mat.map((el, i, j) => {
+            return A.data[j][i];
+        });
+        return mat;
+    }
+
     print(){
         console.table(this.data);
+        console.table(this.T);
     }
 
     randomize(){
         this.map((el, i, j) => {
-            return Math.random()*2 -1;
+            //return Math.random()*2 -1;
+            return Math.floor(Math.random()*10);
         });
     }
 
-    /*static map(A, func) {
-        let mat = new Matrix(A.rows, B.rows);
+    //static escalar x mat
+
+    static esc_mult(A, esc) {
+        var res = new Matrix(A.rows, A.cols);
+
+        res.map((elem, i, j) => {
+            return esc * A.data[i][j];
+        });
+
+        return res;
+    }
+
+    //static mat x mat
+
+    static map(A, B, func) {
+        let mat = new Matrix(A.rows, B.cols);
 
         this.data = this.data.map((arr, i) => {
             return arr.map((el, j) => {
@@ -42,16 +79,6 @@ class Matrix{
         });
 
         return mat;
-    }*/
-
-    map(func){
-        this.data = this.data.map((arr, i) => {
-            return arr.map((el, j) => {
-                return func(el, i, j);
-            });
-        });
-
-        return this;
     }
 
     static add(A, B){
@@ -59,6 +86,16 @@ class Matrix{
 
         res.map((elem, i, j) => {
             return A.data[i][j] + B.data[i][j];
+        });
+
+        return res;
+    }
+
+    static sub(A, B){
+        var res = new Matrix(B.rows, B.cols);
+
+        res.map((elem, i, j) => {
+            return A.data[i][j] - B.data[i][j];
         });
 
         return res;
@@ -75,6 +112,16 @@ class Matrix{
                 sum += el1*el2;
             }
             return sum;
+        });
+
+        return res;
+    }
+
+    static hadamard(A, B) {
+        var res = new Matrix(B.rows, B.cols);
+
+        res.map((elem, i, j) => {
+            return A.data[i][j] * B.data[i][j];
         });
 
         return res;
