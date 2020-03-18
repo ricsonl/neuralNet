@@ -19,7 +19,7 @@ class NeuralNet{
         this.w_ho.randomize();
     }
 
-    feedForward(arr){
+    train(arr, label){
         //console.log(this.w_ih.shape, input.shape, this.w_ho.shape);
         let input = Matrix.arrayToMatrix(arr);
 
