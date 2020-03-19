@@ -34,6 +34,14 @@ class Matrix{
         });
         return mat;
     }
+    
+    static matrixToArray(mat){
+        let arr = [];
+        mat.map((el) => {
+            arr.push(el);
+        });
+        return arr;
+    }
 
     static transpose(A){
         let mat = new Matrix(A.cols, A.rows);
@@ -45,7 +53,6 @@ class Matrix{
 
     print(){
         console.table(this.data);
-        console.table(this.T);
     }
 
     randomize(){
@@ -58,7 +65,7 @@ class Matrix{
     //static escalar x mat
 
     static esc_mult(A, esc) {
-        var res = new Matrix(A.rows, A.cols);
+        let res = new Matrix(A.rows, A.cols);
 
         res.map((elem, i, j) => {
             return esc * A.data[i][j];
@@ -69,10 +76,10 @@ class Matrix{
 
     //static mat x mat
 
-    static map(A, B, func) {
-        let mat = new Matrix(A.rows, B.cols);
+    static map(A, func) {
+        let mat = new Matrix(A.rows, A.cols);
 
-        this.data = this.data.map((arr, i) => {
+        mat.data = A.data.map((arr, i) => {
             return arr.map((el, j) => {
                 return func(el, i, j);
             });
