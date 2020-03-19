@@ -22,7 +22,7 @@ class NeuralNet{
         this.w_ho = new Matrix(this.o_nodes, this.h_nodes);
         this.w_ho.randomize();
 
-        this.alpha = 0.1;
+        this.alpha = 0.4;
     }
 
     train(arr, target){
@@ -72,7 +72,9 @@ class NeuralNet{
 
         let input_T = Matrix.transpose(input);
         let w_ih_deltas = Matrix.mult(gradient_H, input_T);
-        this.w_ih = Matrix.add(this.w_ih, w_ih_deltas); 
+        this.w_ih = Matrix.add(this.w_ih, w_ih_deltas);
+        
+        return output;
     }
 
     predict(arr){
@@ -86,7 +88,8 @@ class NeuralNet{
         let output = Matrix.mult(this.w_ho, hidden);
         output = Matrix.add(output, this.b_ho);
         output.map(sigmoid);
-        output = Matrix.matrixToArray();
+        output = Matrix.matrixToArray(output);
+        
         return output;
     }
 
